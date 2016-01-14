@@ -5,7 +5,13 @@ class Post < ActiveRecord::Base
   validates :name,    presence: true
 
   validate :flurb_not_in_content
-  validate :names_are_proper
+
+  validates :name, format: {
+    with: /\A(\p{L}|(\s|-|\.|,))+\z/,
+    allow_blank: true,
+    message: "isn't a valid name (only letters, spaces, periods, dashes, and commas allowed)"
+    }
+
 
   def flurb_not_in_content
     %i(title content).each do |attribute|
@@ -15,10 +21,7 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def names_are_proper
-    if name != /()/
-      errors.add(name, "isn't a valid name (only letters, spaces, periods, dashes, and commas allowed)")
-    end
-  end
+
+
 
 end
