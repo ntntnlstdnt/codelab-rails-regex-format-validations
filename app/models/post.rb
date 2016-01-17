@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
     with: /\A(\p{L}|(\s|-|\.|,))+\z/,
     allow_blank: true,
     message: "isn't a valid name (only letters, spaces, periods, dashes, and commas allowed)"
-    }
+  }
 
 
   def flurb_not_in_content
@@ -20,8 +20,5 @@ class Post < ActiveRecord::Base
       end
     end
   end
-
-
-
 
 end
